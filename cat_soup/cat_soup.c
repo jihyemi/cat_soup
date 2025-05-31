@@ -57,16 +57,22 @@ int main(void) {
 		printf("\n");
 
 		Sleep(1000);
+		//기분 나빠짐
+		beforeFeeling = kitty_s_feeling;//CP변화 전
 
-		before = kitty;
-
-		//행동
+		//고양이 기분
 		int r = rand() % 6 + 1;
 		int standard = 6 - closeness;
-		printf("띨뻥이 이동: 집사와 치밀할수록 냄비 쪽으로 갈 확률이 높아집니다.\n");
-		printf("주사위 눈이 %d이상이면 냄비 쪽으로 이동합니다.\n", standard);
-		printf("주사위를 굴립니다. 또르륵...\n");
-		printf("%d이(가) 나왔습니다!\n", r);
+		printf("6-2: 주사위 눈이 %d이하이면 그냥 기분이 나빠집니다.\n", standard);
+		printf("주사위를 굴립니다. 또르르...\n");
+		printf("%d이(가) 나왔습니다.\n", r);
+		if (standard >= r) {
+			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+				kitty_s_feeling -= 1;
+			}
+			printf("띨뻥이의 기분이 나빠집니다: %d->%d\n", kitty_s_feeling, beforeFeeling);
+		}
+
 
 		//고양이 이동
 		if (r >= standard) {
