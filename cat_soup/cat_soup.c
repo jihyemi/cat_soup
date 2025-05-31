@@ -194,6 +194,24 @@ int main(void) {
 				printf("현재 친밀도: %d\n", closeness);
 			}
 			break;
+		case 1:
+			printf("띨뻥이의 기분은 그대로입니다: %d", kitty_s_feeling);
+			printf("띨뻥이의 턱을 긁어주었습니다.\n2/6의 확률로 친밀도가 높아집니다.\n");
+			printf("주사위를 굴립니다. 또르륵...\n");
+			printf("%d이(가) 나왔습니다!\n", rr);
+			if (rr >= 5) {
+				printf("친밀도가 높아집니다.\n");
+				if (closeness >= 4) {
+					closeness = 4;
+				}
+				else { closeness += 1; }
+				printf("현재 친밀도: %d\n", closeness);
+			}
+			else {
+				printf("친밀도는 그대로입니다.\n");
+				printf("현재 친밀도: %d\n", closeness);
+			}
+			break;
 		}
 		printf("\n");
 
