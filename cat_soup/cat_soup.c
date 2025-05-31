@@ -75,25 +75,27 @@ int main(void) {
 
 
 		//고양이 이동
-		if (r >= standard) {
-			printf("냄비 쪽으로 움직입니다.\n");
+		switch (kitty_s_feeling) {
+		case 0: printf("기분이 매우 나쁜 띨뻥이는 집으로 향합니다.\n");
+			if (kitty == 2) {
+				kitty;
+			}
+			else {
+				kitty -= 1;
+			}break;
+		case 1: printf("띨뻥이는 심심해서 스크래처 쪽으로 이동합니다.\n");
+			break;
+		case 2:printf("띨뻥이는 기분좋게 식빵을 굽고 있습니다.");
+			break;
+		case 3: printf("띨뻥이는 골골송을 부르며 수프를 만들러 갑니다.\n");
 			if (kitty == ROOM_WIDTH - 1) {
 				kitty;
 			}
 			else {
 				kitty += 1;
 			}
+			break;
 		}
-		else {
-			printf("집 쪽으로 움직입니다.\n");
-			if (kitty == 2) {
-				kitty;
-			}
-			else {
-				kitty -= 1;
-			}
-		}
-
 		//수프 만들기
 		if (kitty == ROOM_WIDTH - 1) {
 			int soup = rand() % 3;
