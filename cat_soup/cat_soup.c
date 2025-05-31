@@ -11,9 +11,11 @@
 
 int main(void) {
 	int stew = 0; //<-수프 숫자
+	int cp = 0;//<-코인. 코인도박하지말아요~
+	int kitty_s_feeling = 3;//-<고영희 기분이랍니다.
+	int beforeFeeling;//<-기분 전의 상태 표시	
 	int closeness = 2; //<-친밀도
 	int kitty = 2; //<-고양이 위치
-	int before; //<-고양이 전 위치
 	srand((unsigned int)time(NULL));
 
 	//인트로
