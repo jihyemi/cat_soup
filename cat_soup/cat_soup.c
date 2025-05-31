@@ -130,9 +130,6 @@ int main(void) {
 				else if (j == kitty && i == 3) {
 					printf("C");
 				}
-				else if (j == before && i == 3 && before != kitty) {
-					printf(".");
-				}
 				else {
 					printf(" ");
 				}
