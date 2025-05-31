@@ -29,8 +29,20 @@ int main(void) {
 	while (1) {
 		printf("====================현재상태====================\n");
 		printf("현재까지 만든 수프: %d개\n", stew);
+		printf("CP: %d 포인트\n", cp);
+		printf("띨뻥이 기분(0~3): %d\n", kitty_s_feeling);
+		switch (kitty_s_feeling) {// 기분 표시
+		case 0: printf("기분이 매우 나쁩니다.");
+			break;
+		case 1: printf("심심해집니다.");
+			break;
+		case 2: printf("식빵을 굽습니다.");
+			break;
+		case 3: printf("골골송을 부릅니다.");
+			break;
+		}
 		printf("집사와의관계(0~4): %d\n", closeness);
-		switch (closeness) {
+		switch (closeness) {//집사와의 관계
 		case 0: printf("곁에 오는 것조차 싫어합니다.\n");
 			break;
 		case 1: printf("간식 자판기 취급입니다.\n");
