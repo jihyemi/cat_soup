@@ -1,0 +1,180 @@
+﻿//20252242 컴퓨터공학과 지헤미
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <Windows.h>
+
+#define ROOM_WIDTH 5
+#define HME_POS 1
+#define BWL_PO (ROOM_WIDTH -2)
+#define ROOM_HEIGHT 4
+
+int main(void) {
+	int stew = 0; //<-수프 숫자
+	int closeness = 2; //<-친밀도
+	int kitty = 2; //<-고양이 위치
+	int before; //<-고양이 전 위치
+	srand((unsigned int)time(NULL));
+
+	//인트로
+	printf("****야옹이와수프****\n");
+	printf("@@@@/\\/\\@@@@@\n@@@(0-0)@@@@@\n@@@(|||  )@@@\n@@@@@@@@@@@@@\n");
+	printf("야옹이 띨뻥이는 자신을 위해 식빵을 굽고 있습니다.\n");
+	Sleep(2500);
+	system("cls");
+
+	//화면전환
+	while (1) {
+		printf("====================현재상태====================\n");
+		printf("현재까지 만든 수프: %d개\n", stew);
+		printf("집사와의관계(0~4): %d\n", closeness);
+		switch (closeness) {
+		case 0: printf("곁에 오는 것조차 싫어합니다.\n");
+			break;
+		case 1: printf("간식 자판기 취급입니다.\n");
+			break;
+		case 2: printf("그럭저럭 쓸만한 집사입니다.\n");
+			break;
+		case 3: printf("훌룡한 집사로 인정 받고 있습니다.\n");
+			break;
+		case 4: printf("집사 껌딱지입니다.\n");
+		}
+		printf("================================================\n");
+		printf("\n");
+
+		Sleep(1000);
+
+		before = kitty;
+
+		//행동
+		int r = rand() % 6 + 1;
+		int standard = 6 - closeness;
+		printf("띨뻥이 이동: 집사와 치밀할수록 냄비 쪽으로 갈 확률이 높아집니다.\n");
+		printf("주사위 눈이 %d이상이면 냄비 쪽으로 이동합니다.\n", standard);
+		printf("주사위를 굴립니다. 또르륵...\n");
+		printf("%d이(가) 나왔습니다!\n", r);
+
+		//고양이 이동
+		if (r >= standard) {
+			printf("냄비 쪽으로 움직입니다.\n");
+			if (kitty == ROOM_WIDTH - 1) {
+				kitty;
+			}
+			else {
+				kitty += 1;
+			}
+		}
+		else {
+			printf("집 쪽으로 움직입니다.\n");
+			if (kitty == 2) {
+				kitty;
+			}
+			else {
+				kitty -= 1;
+			}
+		}
+
+		//수프 만들기
+		if (kitty == ROOM_WIDTH - 1) {
+			int soup = rand() % 3;
+			switch (soup) {
+			case 0: printf("띨뻥이가 감자 수프를 만들었습니다!\n");
+				break;
+			case 1: printf("띨뻥이가 감자 수프를 만들었습니다!\n");
+				break;
+			case 2: printf("띨뻥이가 감자 수프를 만들었습니다!\n");
+				break;
+			}
+			stew += 1;
+		}
+		printf("현재까지 만든 수프: %d\n", stew);
+		printf("\n");
+
+		Sleep(1000);
+
+		//이동
+		for (int i = 1; i <= ROOM_HEIGHT; i++) {
+			for (int j = 1; j <= ROOM_WIDTH; j++) {
+				if (i == 1 || i == ROOM_HEIGHT) {
+					printf("#");
+				}
+				else if (j == 1 || j == ROOM_WIDTH) {
+					printf("#");
+				}
+				else if (j == 2 && i == 2) {
+					printf("H");
+				}
+				else if (j == ROOM_WIDTH - 1 && i == 2) {
+					printf("B");
+				}
+				else if (j == kitty && i == 3) {
+					printf("C");
+				}
+				else if (j == before && i == 3 && before != kitty) {
+					printf(".");
+				}
+				else {
+					printf(" ");
+				}
+			}
+			printf("\n");
+		}
+		printf("\n");
+
+		Sleep(1000);
+
+		//상호작용
+		int x = 0;
+		printf("어떤 상호작용을 하시겠습니까? 0. 아무것도 하지 않음. 1. 긁어주기\n");
+		do {
+			printf(">>");
+			scanf_s("%d", &x);
+		} while (x != 1 && x != 0);
+
+		int rr = rand() % 6 + 1;
+
+		switch (x) {
+		case 1:
+			printf("띨뻥이의 턱을 긁어주었습니다.\n2/6의 확률로 친밀도가 높아집니다.\n");
+			printf("주사위를 굴립니다. 또르륵...\n");
+			printf("%d이(가) 나왔습니다!\n", rr);
+			if (rr >= 5) {
+				printf("친밀도가 높아집니다.\n");
+				if (closeness >= 4) {
+					closeness = 4;
+				}
+				else { closeness += 1; }
+				printf("현재 친밀도: %d\n", closeness);
+			}
+			else {
+				printf("친밀도는 그대로입니다.\n");
+				printf("현재 친밀도: %d\n", closeness);
+			}
+			break;
+		case 0:
+			printf("아무것도 하지 않습니다.\n4/6의 확률로 친밀도가 떨어집니다.\n");
+			printf("주사위를 굴립니다. 또르륵...\n");
+			printf("%d이(가) 나왔습니다!\n", rr);
+			if (rr <= 4) {
+				printf("친밀도가 떨어집니다.\n");
+				if (closeness <= 0) {
+					closeness = 0;
+				}
+				else {
+					closeness -= 1;
+				}
+				printf("현재 친밀도: %d\n", closeness);
+			}
+			else {
+				printf("친밀도가 그대로입니다.\n");
+				printf("현재 친밀도: %d\n", closeness);
+			}
+			break;
+		}
+		printf("\n");
+
+		Sleep(2000);
+		system("cls");
+	}
+	return 0;
+}
