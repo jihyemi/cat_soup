@@ -192,6 +192,32 @@ int main(void) {
 
 		Sleep(2000);
 		system("cls");
+
+		//재화 생산
+		int max = (kitty_s_feeling - 1) + closeness;
+		max = cp;
+		printf("띨뻥이의 기분(0~3): %d\n", kitty_s_feeling);
+		printf("집사와의 친밀도(0~4): %d\n", closeness);
+		printf("띨뻥이의 기분과 찬밀도에 따라서 CP가 %d 포인트 생산되었습니다.\n", max);
+		printf("보유 CP: %d 포인트\n", max);
+
+		Sleep(2000);
+		system("cls");
+
+		//상점구매
+		int shopping = 0;
+		printf("상점에서 물건을 살 수 있습니다.\n");
+		printf("어떤 물건을 구매할까요?\n");
+		printf("0. 아무 것도 사지 않는다.\n");
+		printf("1. 장난감 쥐: 1CP\n");
+		printf("2. 레이져 포인터: 2CP\n");
+		printf("3. 스크래처: 4CP\n");
+		printf("4. 캣 타워: 6CP\n");
+		printf(">>\n");
+		scanf_s("%d", &shopping);
+
+		Sleep(2000);
+		system("cls");
 	}
 	return 0;
 }
