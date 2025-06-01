@@ -16,6 +16,8 @@ int main(void) {
 	int beforeFeeling;//<-기분 전의 상태 표시	
 	int closeness = 2; //<-친밀도
 	int kitty = 2; //<-고양이 위치
+	int scratcher = 0;//idk 스크래쳐 임시위치
+	int catTower = 0;//idk 캣 타워 임시위치
 	srand((unsigned int)time(NULL));
 
 	//인트로
@@ -32,13 +34,13 @@ int main(void) {
 		printf("CP: %d 포인트\n", cp);
 		printf("띨뻥이 기분(0~3): %d\n", kitty_s_feeling);
 		switch (kitty_s_feeling) {// 기분 표시
-		case 0: printf("기분이 매우 나쁩니다.");
+		case 0: printf("기분이 매우 나쁩니다.\n");
 			break;
-		case 1: printf("심심해집니다.");
+		case 1: printf("심심해집니다.\n");
 			break;
-		case 2: printf("식빵을 굽습니다.");
+		case 2: printf("식빵을 굽습니다.\n");
 			break;
-		case 3: printf("골골송을 부릅니다.");
+		case 3: printf("골골송을 부릅니다.\n");
 			break;
 		}
 		printf("집사와의관계(0~4): %d\n", closeness);
