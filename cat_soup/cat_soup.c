@@ -192,35 +192,25 @@ int main(void) {
 		printf("레이져 포인터로 놀아 주기\n");
 		do {
 			printf(">>");
-			scanf_s("%d", &x);
-		} while (x != 1 && x != 0);
+ 			scanf_s("%d", &x);
+ 		} while (x != 1 && x != 0);
 
 		int rr = rand() % 6 + 1;
 
 		switch (x) {
-		case 1:
-			printf("띨뻥이의 턱을 긁어주었습니다.\n2/6의 확률로 친밀도가 높아집니다.\n");
-			printf("주사위를 굴립니다. 또르륵...\n");
-			printf("%d이(가) 나왔습니다!\n", rr);
-			if (rr >= 5) {
-				printf("친밀도가 높아집니다.\n");
-				if (closeness >= 4) {
-					closeness = 4;
-				}
-				else { closeness += 1; }
-				printf("현재 친밀도: %d\n", closeness);
+		case 0:
+			if (kitty_s_feeling <= 0) {//기분 떨어짐
+				kitty_s_feeling;
 			}
 			else {
-				printf("친밀도는 그대로입니다.\n");
-				printf("현재 친밀도: %d\n", closeness);
+				kitty_s_feeling -= 1;
 			}
-			break;
-		case 0:
-			printf("아무것도 하지 않습니다.\n4/6의 확률로 친밀도가 떨어집니다.\n");
-			printf("주사위를 굴립니다. 또르륵...\n");
+			printf("띨뻥이의 기분이 나빠집니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
+
+			printf("아무것도 하지 않습니다.\n4/6의 확률로 친밀도가 떨어집니다.\n주사위를 굴립니다. 또르륵...\n");
 			printf("%d이(가) 나왔습니다!\n", rr);
-			if (rr <= 4) {
-				printf("친밀도가 떨어집니다.\n");
+			if (rr <= 5) {//친밀도
+				printf("집사와의 관계가 나빠집니다.\n");
 				if (closeness <= 0) {
 					closeness = 0;
 				}
@@ -236,8 +226,7 @@ int main(void) {
 			break;
 		case 1:
 			printf("띨뻥이의 기분은 그대로입니다: %d", kitty_s_feeling);
-			printf("띨뻥이의 턱을 긁어주었습니다.\n2/6의 확률로 친밀도가 높아집니다.\n");
-			printf("주사위를 굴립니다. 또르륵...\n");
+			printf("띨뻥이의 턱을 긁어주었습니다.\n2/6의 확률로 친밀도가 높아집니다.\n주사위를 굴립니다. 또르륵...\n");
 			printf("%d이(가) 나왔습니다!\n", rr);
 			if (rr >= 5) {
 				printf("친밀도가 높아집니다.\n");
@@ -251,6 +240,26 @@ int main(void) {
 				printf("친밀도는 그대로입니다.\n");
 				printf("현재 친밀도: %d\n", closeness);
 			}
+			break;
+		case 2:
+			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+				kitty_s_feeling += 1;
+				if (kitty_s_feeling >= 3) {
+					kitty_s_feeling == 3;
+				}
+			}
+			printf("장남감 쥐로 띨뻥이와 놀아 주었습니다.\n");
+			printf("띨뻥이의 기분이 조금 좋아졌습니다: %d->%d\n",beforeFeeling, kitty_s_feeling);
+			break;
+		case 3:
+			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+				kitty_s_feeling += 2;
+				if (kitty_s_feeling >= 3) {
+					kitty_s_feeling == 3;
+				}
+			}
+			printf("레이져 포인터로 띨뻥이와 놀아 주었습니다.\n");
+			printf("띨뻥이의 기분이 꽤 좋아졌습니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
 			break;
 		}
 		printf("\n");
