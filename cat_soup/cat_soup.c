@@ -81,13 +81,51 @@ int main(void) {
 		case 0: printf("기분이 매우 나쁜 띨뻥이는 집으로 향합니다.\n");
 			if (kitty == 2) {
 				kitty;
+				kitty_s_feeling += 1;
+				printf("집에 있어 기분이 나아집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
 			}
 			else {
 				kitty -= 1;
 			}break;
-		case 1: printf("띨뻥이는 심심해서 스크래처 쪽으로 이동합니다.\n");
+		case 1: //if 사용해 더 가까운 놀이기구 (스크래쳐 OR 캣 타워) 쪽으로 이동
+			printf("띨뻥이는 심심해서");
+			if (scratcher - kitty > catTower - kitty) {
+				printf("스크래쳐 쪽으로 이동합니다.\n");
+				if (kitty == scratcher) {
+					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+						kitty_s_feeling += 1;
+					}
+					printf("띨뻥이는 스크래쳐를 긁고놀았습니다.\n");
+					printf("기분이 조금 좋아졌습니다. %d->%d", beforeFeeling, kitty_s_feeling);
+				}
+				else {
+					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+						kitty_s_feeling -= 1;
+					}
+					printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+				}
+			}
+			else {
+				printf("캣 타워 쪽으로 이동합니다.\n");
+				if (kitty == catTower) {
+					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+						kitty_s_feeling += 2;
+						if (kitty_s_feeling >= 3) {
+							kitty_s_feeling == 3;
+						}
+					}
+					printf("띨뻥이는 캣타워를 뛰어다닙니다.\n");
+					printf("기분이 조금 좋아졌습니다. %d->%d", beforeFeeling, kitty_s_feeling);
+				}
+				else {
+					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+						kitty_s_feeling -= 1;
+					}
+					printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+				}
+			}
 			break;
-		case 2:printf("띨뻥이는 기분좋게 식빵을 굽고 있습니다.");
+		case 2:printf("띨뻥이는 기분좋게 식빵을 굽고 있습니다.\n");
 			break;
 		case 3: printf("띨뻥이는 골골송을 부르며 수프를 만들러 갑니다.\n");
 			if (kitty == ROOM_WIDTH - 1) {
