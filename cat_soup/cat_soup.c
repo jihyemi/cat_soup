@@ -16,6 +16,7 @@ int main(void) {
 	int beforeFeeling;//<-기분 전의 상태 표시	
 	int closeness = 2; //<-친밀도
 	int kitty = 2; //<-고양이 위치
+	int before = 2; //<-고양이 전 위치
 	int scratcher = 0;//idk 스크래쳐 임시위치
 	int catTower = 0;//idk 캣 타워 임시위치
 	srand((unsigned int)time(NULL));
@@ -59,13 +60,15 @@ int main(void) {
 		printf("\n");
 
 		Sleep(1000);
-		//기분 나빠짐
+
+		before = kitty;//고양이 전 위치
 		beforeFeeling = kitty_s_feeling;//CP변화 전
+		
 
 		//고양이 기분
 		int r = rand() % 6 + 1;
 		int standard = 6 - closeness;
-		printf("6-2: 주사위 눈이 %d이하이면 그냥 기분이 나빠집니다.\n", standard);
+		printf("6-%d: 주사위 눈이 %d이하이면 그냥 기분이 나빠집니다.\n", closeness, standard);
 		printf("주사위를 굴립니다. 또르르...\n");
 		printf("%d이(가) 나왔습니다.\n", r);
 		if (standard >= r) {
@@ -166,11 +169,20 @@ int main(void) {
 				else if (j == 2 && i == 2) {
 					printf("H");
 				}
+				else if (j == catTower && i == 2) {
+					printf("T");
+				}
+				else if (j == scratcher && i == 2) {
+					printf("S");
+				}
 				else if (j == ROOM_WIDTH - 1 && i == 2) {
 					printf("B");
 				}
 				else if (j == kitty && i == 3) {
 					printf("C");
+				}
+				else if (j == before && i == 3 && before != kitty) {
+					printf(".");
 				}
 				else {
 					printf(" ");
