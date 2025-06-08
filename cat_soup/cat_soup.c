@@ -211,10 +211,7 @@ int main(void) {
 
 		switch (x) {
 		case 0:
-			if (kitty_s_feeling <= 0) {//기분 떨어짐
-				kitty_s_feeling;
-			}
-			else {
+			if (kitty_s_feeling > 0) {
 				kitty_s_feeling -= 1;
 			}
 			printf("띨뻥이의 기분이 나빠집니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
@@ -254,20 +251,17 @@ int main(void) {
 			}
 			break;
 		case 2:
-			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+			if (kitty_s_feeling < 3) {
 				kitty_s_feeling += 1;
-				if (kitty_s_feeling >= 3) {
-					kitty_s_feeling == 3;
-				}
 			}
 			printf("장남감 쥐로 띨뻥이와 놀아 주었습니다.\n");
 			printf("띨뻥이의 기분이 조금 좋아졌습니다: %d->%d\n",beforeFeeling, kitty_s_feeling);
 			break;
 		case 3:
-			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+			if (kitty_s_feeling >= 0 && kitty_s_feeling < 3) {
 				kitty_s_feeling += 2;
 				if (kitty_s_feeling >= 3) {
-					kitty_s_feeling == 3;
+					kitty_s_feeling = 3;
 				}
 			}
 			printf("레이져 포인터로 띨뻥이와 놀아 주었습니다.\n");
