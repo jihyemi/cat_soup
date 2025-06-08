@@ -4,7 +4,7 @@
 #include <time.h>
 #include <Windows.h>
 
-#define ROOM_WIDTH 5
+#define ROOM_WIDTH 10
 #define HME_POS 1
 #define BWL_PO (ROOM_WIDTH -2)
 #define ROOM_HEIGHT 4
@@ -16,9 +16,20 @@ int main(void) {
 	int beforeFeeling;//<-기분 전의 상태 표시	
 	int closeness = 2; //<-친밀도
 	int kitty = 2; //<-고양이 위치
-	int before = 2; //<-고양이 전 위치
-	int scratcher = 0;//idk 스크래쳐 임시위치
-	int catTower = 0;//idk 캣 타워 임시위치
+	int before = 0; //<-고양이 전 위치
+	int turnCount = 0;//돌발퀘스트를 위한 턴 세기
+	
+	int ratToy = 0;//장남감쥐 (샀는거 구분)
+	int lazer = 0;//레이져 포인터 (샀는거 구분)
+	int scratcher = 0;//idk 스크래쳐 (샀는거 구분)
+	int catTower = 0;//idk 캣 타워 (샀는거 구분)
+
+	int rand_room_width = ROOM_WIDTH - 2;
+	int limit = 3;
+
+	int scratcherand = 0;//방에 스크래쳐
+	int catTowerand = 0;//방에 캣타워
+
 	srand((unsigned int)time(NULL));
 
 	//인트로
@@ -72,11 +83,12 @@ int main(void) {
 		printf("주사위를 굴립니다. 또르르...\n");
 		printf("%d이(가) 나왔습니다.\n", r);
 		if (standard >= r) {
-			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
+			if (kitty_s_feeling > 0) {
 				kitty_s_feeling -= 1;
 			}
-			printf("띨뻥이의 기분이 나빠집니다: %d->%d\n", kitty_s_feeling, beforeFeeling);
+			printf("띨뻥이의 기분이 나빠집니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
 		}
+		printf("\n");
 
 
 		//고양이 이동
@@ -157,7 +169,10 @@ int main(void) {
 
 		Sleep(1000);
 
-		//이동
+
+
+
+		//행동
 		for (int i = 1; i <= ROOM_HEIGHT; i++) {
 			for (int j = 1; j <= ROOM_WIDTH; j++) {
 				if (i == 1 || i == ROOM_HEIGHT) {
@@ -275,11 +290,11 @@ int main(void) {
 
 		//재화 생산
 		int max = (kitty_s_feeling - 1) + closeness;
-		max = cp;
 		printf("띨뻥이의 기분(0~3): %d\n", kitty_s_feeling);
 		printf("집사와의 친밀도(0~4): %d\n", closeness);
 		printf("띨뻥이의 기분과 찬밀도에 따라서 CP가 %d 포인트 생산되었습니다.\n", max);
-		printf("보유 CP: %d 포인트\n", max);
+		cp += max;
+		printf("보유 CP: %d 포인트\n", cp);
 
 		Sleep(2000);
 		system("cls");
