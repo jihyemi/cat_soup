@@ -295,15 +295,118 @@ int main(void) {
 		printf("상점에서 물건을 살 수 있습니다.\n");
 		printf("어떤 물건을 구매할까요?\n");
 		printf("0. 아무 것도 사지 않는다.\n");
-		printf("1. 장난감 쥐: 1CP\n");
-		printf("2. 레이져 포인터: 2CP\n");
-		printf("3. 스크래처: 4CP\n");
-		printf("4. 캣 타워: 6CP\n");
-		printf(">>\n");
-		scanf_s("%d", &shopping);
+		printf("1. 장난감 쥐: 1CP");
+		if (ratToy > 0) {
+			printf("(품절)");
+		}
+		printf("\n");
+		printf("2. 레이져 포인터: 2CP");
+		if (lazer > 0) {
+			printf("(품절)");
+		}
+		printf("\n");
+		printf("3. 스크래처: 4CP");
+		if (scratcher > 0) {
+			printf("(품절)");
+		}
+		printf("\n");
+		printf("4. 캣 타워: 6CP");
+		if (catTower > 0) {
+			printf("(품절)");
+		}
+		printf("\n");
+		 do{
+			printf(">>");
+			scanf_s("%d", &shopping);
+		 } while (shopping <= 0 && shopping >= 4);
 
+
+		 switch (shopping){
+		 case 0:
+			 kitty_s_feeling = 0;
+			 printf("정말 아무것도 안사시는군요.\n");
+			 printf("집사 자격 박탈입니다.\n");
+			 printf("띨뻥이의 기분이 0으로 됩니다. =(ㅡ^ㅡ)=\n");
+			 break;
+		 case 1:
+			 if (cp >= 1) {
+				 cp -= 1;
+				 ratToy = 1;
+				 printf("장난감 쥐를 구매했습니다.\n");
+				 printf("보유 CP %d 포인트\n", cp);
+			 }
+			 else if (cp < 1) {
+				 printf("CP가 부족합니다.");
+			 }
+			 else if (ratToy = 1) {
+				 printf("장난감 쥐를 이미 구매했습니다.\n");
+			 }
+			 break;
+		 case 2:
+			 if (cp >= 2) {
+				 cp -= 2;
+				 lazer = 1;
+				 printf("레이져 포인터를 구매했습니다.\n");
+				 printf("보유 CP %d 포인트\n", cp);
+			 }
+			 else if (cp < 2) {
+				 printf("CP가 부족합니다.");
+
+			 }
+			 else if (lazer = 1) {
+				 printf("레이져 포인터를 이미 구매했습니다.\n");
+			 }
+			 break;
+		 case 3:
+			 if (cp >= 4) {
+				 cp -= 4;
+				 scratcher += 1;
+				 printf("스크래쳐를 구매했습니다.\n");
+				 printf("보유 CP %d 포인트\n", cp);
+			 }
+			 else if (cp < 4) {
+				 printf("CP가 부족합니다.\n");
+			 }
+			 else if (scratcher > 0) {
+				 printf("스크래쳐를 이미 구매했습니다.\n");
+			 }
+			 break;
+		 case 4:
+			 if (cp >= 6) {
+				 cp -= 6;
+				 catTower += 1;
+				 printf("캣 타워를 구매했습니다.\n");
+				 printf("보유 CP %d 포인트\n", cp);
+			 }
+			 else if (cp < 6) {
+				 printf("CP가 부족합니다.\n");
+			 }
+			 else if (catTower > 0) {
+				 printf("캣 타워를 이미 구매했습니다.\n");
+			 }
+			 break;
+			 
+		 }
+		 turnCount++;
 		Sleep(2000);
 		system("cls");
+
+		//돌발 퀘스트
+		if (kitty_s_feeling == 0) {
+			printf("띨뻥이가 기분이 매우 나쁩니다!\n");
+			printf("앞발바닥으로 집사를 공격합니다.\n");
+		}
+		else if (kitty_s_feeling == 1 || kitty_s_feeling == 2) {
+			printf("띨뻥이는 심심해 집사에게 재롱을 부려보라 합니다.\n");
+			printf("무엇을 하시겠습니까?\n");
+			printf("0. \n");
+		}
+		else if (kitty_s_feeling == 3) {
+			printf("\n");
+		}
+		Sleep(2000);
+		system("cls");
+
 	}
 	return 0;
 }
