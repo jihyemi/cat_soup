@@ -112,31 +112,43 @@ int main(void) {
 					}
 					printf("띨뻥이는 스크래쳐를 긁고놀았습니다.\n");
 					printf("기분이 조금 좋아졌습니다. %d->%d", beforeFeeling, kitty_s_feeling);
+				if (kitty == 2) {
+					kitty;
+					kitty_s_feeling += 1; 
+					printf("집에 들오는 띨뻥이는 집에서 안정감을 느낍니다.\n");
 				}
 				else {
-					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
-						kitty_s_feeling -= 1;
-					}
-					printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+					kitty -= 1;
 				}
 			}
-			else {
-				printf("캣 타워 쪽으로 이동합니다.\n");
-				if (kitty == catTower) {
-					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
-						kitty_s_feeling += 2;
-						if (kitty_s_feeling >= 3) {
-							kitty_s_feeling == 3;
-						}
-					}
-					printf("띨뻥이는 캣타워를 뛰어다닙니다.\n");
-					printf("기분이 조금 좋아졌습니다. %d->%d", beforeFeeling, kitty_s_feeling);
+			break;
+		case 1: 
+			if (scratcher == 0 || catTower == 0) {
+				if (kitty_s_feeling > 0) {
+					kitty_s_feeling -= 1;
 				}
-				else {
-					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
-						kitty_s_feeling -= 1;
+				printf("놀 거리가 없어서 기분이 매우 나빠집니다.\n");
+			}
+			else if (scratcher_distance < catTower_distance) {
+				printf("띨뻥이는 심심해서 스크래처 쪽으로 이동합니다.\n");
+				if (kitty == scratcherand) {
+					if (kitty_s_feeling < 3) {
+						kitty_s_feeling += 1;
 					}
-					printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+					printf("띨뻥이는 스크래쳐를 긁고 놀았습니다.\n");
+					printf("기분이 조금 좋아졌습니다.\n");
+				}
+			}
+			else if (catTower_distance < scratcher_distance) {
+				if (kitty == catTowerand) {
+					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 1) {
+						kitty_s_feeling += 2;
+						
+					}else if (kitty_s_feeling >= 2) {
+						kitty_s_feeling = 3;
+					}
+					printf("띨뻥이는 캣타워를 긁고 놀았습니다.\n");
+					printf("기분이 조금 좋아졌습니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
 				}
 			}
 			break;
