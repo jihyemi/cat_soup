@@ -30,6 +30,8 @@ int main(void) {
 	int scratcherand = 0;//방에 스크래쳐
 	int catTowerand = 0;//방에 캣타워
 
+	int cpRand = 0;//재화 랜덤으로 주기
+
 	srand((unsigned int)time(NULL));
 
 	//인트로
@@ -413,20 +415,96 @@ int main(void) {
 		system("cls");
 
 		//돌발 퀘스트
-		if (kitty_s_feeling == 0) {
-			printf("띨뻥이가 기분이 매우 나쁩니다!\n");
-			printf("앞발바닥으로 집사를 공격합니다.\n");
+		if (turnCount % 3 == 0) {
+			if (kitty_s_feeling == 0) {
+				printf("띨뻥이가 기분이 매우 나쁩니다!\n");
+				Sleep(500);
+				printf("당신을 할퀼려 합니다.\n");
+				Sleep(500);
+				printf("5번을 눌러 피하세요!\n");
+				Sleep(1000);
+				printf(">>");
+				scanf_s("%d", &x);
+				if (x == 5) {
+					printf("띨뻥이는 당신이 피해 아쉬워합니다.\n");
+					printf("아무일도 일어나지 않았습니다.\n");
+				}
+				else {
+					if (kitty_s_feeling < 3) {
+						kitty_s_feeling += 1;
+					}
+					printf("띨뻥이가 당신을 할켰습니다!\n");
+					printf("띨뻥이의 기분이 좀 나아졌습니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+				}
+				break;
+			}
+			else if (kitty_s_feeling == 1 || kitty_s_feeling == 2) {
+				printf("띨뻥이는 심심해 집사가 행동하길 바랍니다.\n");
+				printf("무엇을 하시겠습니까?\n");
+				printf("0. 부끄러워한다.\n");
+				printf("1. 고양이송 부르기.\n");
+				printf("2. 띨뻥이한테 뽀뽀하기.\n");
+				printf("3. 궁디팡팡이 하기.\n");
+				do {
+					printf(">>");
+					scanf_s("%d", &x);
+				} while (x > 3 && x < 0);
+
+				switch (x) {
+				case 0:
+					kitty_s_feeling -= 1;
+					printf("띨뻥이는 당신에게 실망합니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+
+					break;
+				case 1:
+					cp += 1;
+					printf("띨뻥이가 안쓰럽게 쳐다봅니다\n");
+					printf("당신에게 CP 1 포인트를 줍니다\n");
+					printf("보유 CP : %d포인트\n", cp);
+					break;
+				case 2:
+					cpRand = rand() % 2 + 1;
+					cp += cpRand;
+					printf("띨뻥이의 표정은 언짢지만 꼬리를 살랑살랑 흔듭니다.\n");
+					printf("띨뻥이는 당신에게 %d포인트를 줍니다!\n", cpRand);
+					printf("보유 CP : %d포인트\n", cp);
+					break;
+				case 3:
+					cpRand = rand() % 3 + 1;
+					cp += cpRand;
+					kitty_s_feeling += 1;
+					printf("띨뻥이는 매우 만족하고 있습니다! %d->%d\n", beforeFeeling, kitty_s_feeling);
+					printf("만족스러운 띨뻥이는 당신에게 %d포인트를 줍니다!\n", cpRand);
+					printf("보유 CP : %d포인트\n", cp);
+					break;
+				}
+			}
+			else if (kitty_s_feeling == 3) {
+				printf("그르릉...\n");
+				printf("띨뻥이가 당신을 향해 골골송을 부릅니다.\n골골송은 당신을 지금 매우 좋아한다는 증거!\n");
+				printf("무엇을 하시겠습니까?\n");
+				printf("1. 쓰담는다.\n");
+				printf("2. 집안 구석에 있는 츄르를 준다.\n");
+				do {
+					printf(">>");
+					scanf_s("%d", &x);
+				} while (x != 1 && x != 2);
+				if (x == 1) {
+					cp += 2;
+					printf("띨뻥이가 CP 2포인트를 줍니다.\n");
+					printf("보유 CP : %d포인트", cp);
+				}
+				else if (x == 2) {
+					cp += 5;
+					printf("띨뻥이는 츄르를 먹어 매우 행복합니다!\n");
+					printf("띨뻥이가 CP 5포인트를 줍니다.\n");
+					printf("보유 CP : %d포인트", cp);
+				}
+			}
+			Sleep(2000);
+			system("cls");
 		}
-		else if (kitty_s_feeling == 1 || kitty_s_feeling == 2) {
-			printf("띨뻥이는 심심해 집사에게 재롱을 부려보라 합니다.\n");
-			printf("무엇을 하시겠습니까?\n");
-			printf("0. \n");
-		}
-		else if (kitty_s_feeling == 3) {
-			printf("\n");
-		}
-		Sleep(2000);
-		system("cls");
+		
 
 	}
 	return 0;
