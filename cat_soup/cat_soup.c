@@ -274,21 +274,33 @@ int main(void) {
 		Sleep(1000);
 
 		//상호작용
-		int x = 0;
+		int interactNum = 0;
+		int whatToDo = 0;
+
 		printf("어떤 상호작용을 하시겠습니까?\n");
-		//배열이용(?)
-		printf("아무것도 하지 않음\n");
-		printf("긁어주기\n");
-		printf("장난감 쥐로 놀아주기\n");
-		printf("레이져 포인터로 놀아 주기\n");
+		printf("%d. 아무것도 하지 않음\n", interactNum);
+		interactNum += 1;
+		printf("%d. 긁어주기\n", interactNum);
+		if (ratToy >= 1) {
+			interactNum += 1;
+			printf("%d.장난감 쥐로 놀아주기\n", interactNum);
+		}
+		if (lazer >= 1) {
+			interactNum += 1;
+			printf("%d. 레이져 포인터로 놀아 주기\n", interactNum);
+		}
+
 		do {
 			printf(">>");
- 			scanf_s("%d", &x);
- 		} while (x != 1 && x != 0);
+ 			scanf_s("%d", &whatToDo);
+ 		} while ( whatToDo < 0 && whatToDo > interactNum);
+
+		if (interactNum == 2 && ratToy <= 0)
+			interactNum = 3;
 
 		int rr = rand() % 6 + 1;
 
-		switch (x) {
+		switch (whatToDo) {
 		case 0:
 			if (kitty_s_feeling > 0) {
 				kitty_s_feeling -= 1;
