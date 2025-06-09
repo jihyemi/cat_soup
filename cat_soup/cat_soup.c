@@ -74,9 +74,20 @@ int main(void) {
 
 		Sleep(1000);
 
-		before = kitty;//고양이 전 위치
-		beforeFeeling = kitty_s_feeling;//CP변화 전
-		
+		if (turnCount == 0) {}
+		else { before = kitty; }//고양이 전 위치
+
+		beforeFeeling = kitty_s_feeling;//기분변화 전
+
+
+		if (catTower == 1) {//방에 표시하기 위한 캣 타워 함수
+			scratcherand != catTowerand;
+			catTowerand = rand() % (rand_room_width - limit + 1) + limit;
+		}
+		if (scratcher == 1) {//방에 표시하기 위한 스크래쳐 랜덤 함수
+			scratcherand != catTowerand;
+			scratcherand = rand() % (rand_room_width - limit + 1) + limit;
+		}
 
 		//고양이 기분
 		int r = rand() % 6 + 1;
@@ -89,80 +100,115 @@ int main(void) {
 				kitty_s_feeling -= 1;
 			}
 			printf("띨뻥이의 기분이 나빠집니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
+			beforeFeeling = kitty_s_feeling;
 		}
 		printf("\n");
 
 
 		//고양이 이동
+
+		int catTower_distance = (catTowerand - kitty > 0) ? catTowerand - kitty : -(catTowerand - kitty);
+		int scratcher_distance = (scratcherand - kitty > 0) ? scratcherand - kitty : -(scratcherand - kitty);
+
+
+
 		switch (kitty_s_feeling) {
 		case 0: printf("기분이 매우 나쁜 띨뻥이는 집으로 향합니다.\n");
-			if (kitty == 2) {
-				kitty;
-				kitty_s_feeling += 1;
-				printf("집에 있어 기분이 나아집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+			if (turnCount == 0) {
+				break;
 			}
 			else {
-				kitty -= 1;
-			}break;
-		case 1: //if 사용해 더 가까운 놀이기구 (스크래쳐 OR 캣 타워) 쪽으로 이동
-			printf("띨뻥이는 심심해서");
-			if (scratcher - kitty > catTower - kitty) {
-				printf("스크래쳐 쪽으로 이동합니다.\n");
-				if (kitty == scratcher) {
-					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 3) {
-						kitty_s_feeling += 1;
-					}
-					printf("띨뻥이는 스크래쳐를 긁고놀았습니다.\n");
-					printf("기분이 조금 좋아졌습니다. %d->%d", beforeFeeling, kitty_s_feeling);
 				if (kitty == 2) {
 					kitty;
-					kitty_s_feeling += 1; 
-					printf("집에 들오는 띨뻥이는 집에서 안정감을 느낍니다.\n");
+					kitty_s_feeling += 1;
+					printf("집에 들어온 띨뻥이는 집에서 안정감을 느낍니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
 				}
 				else {
 					kitty -= 1;
 				}
 			}
 			break;
-		case 1: 
-			if (scratcher == 0 || catTower == 0) {
+		case 1:
+			if (scratcher == 0 && catTower == 0) {
 				if (kitty_s_feeling > 0) {
 					kitty_s_feeling -= 1;
 				}
-				printf("놀 거리가 없어서 기분이 매우 나빠집니다.\n");
-			}
-			else if (scratcher_distance < catTower_distance) {
-				printf("띨뻥이는 심심해서 스크래처 쪽으로 이동합니다.\n");
-				if (kitty == scratcherand) {
-					if (kitty_s_feeling < 3) {
-						kitty_s_feeling += 1;
-					}
-					printf("띨뻥이는 스크래쳐를 긁고 놀았습니다.\n");
-					printf("기분이 조금 좋아졌습니다.\n");
+				printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+				beforeFeeling = kitty_s_feeling;
+				if (kitty == 2) {
+					kitty;
+					kitty_s_feeling += 1;
+					printf("집에 들어온 띨뻥이는 집에서 안정감을 느낍니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
 				}
 			}
-			else if (catTower_distance < scratcher_distance) {
-				if (kitty == catTowerand) {
-					if (kitty_s_feeling >= 0 && kitty_s_feeling <= 1) {
-						kitty_s_feeling += 2;
-						
-					}else if (kitty_s_feeling >= 2) {
-						kitty_s_feeling = 3;
+			else if (scratcher > 0) {
+				if (scratcher_distance < catTower_distance || catTower == 0) {
+					printf("띨뻥이는 심심해서 스크래처 쪽으로 이동합니다.\n");
+					if (scratcherand > kitty) {//놀이기구 이동
+						kitty += 1;
 					}
-					printf("띨뻥이는 캣타워를 긁고 놀았습니다.\n");
-					printf("기분이 조금 좋아졌습니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+					else if (scratcherand < kitty) {
+						kitty -= 1;
+					}
+
+					if (kitty == scratcherand) {
+						if (kitty == scratcherand) {
+							if (kitty_s_feeling < 3) {
+								kitty_s_feeling += 1;
+							}
+							printf("띨뻥이는 스크래쳐를 긁고 놀았습니다.\n");
+							printf("기분이 조금 좋아졌습니다.%d->%d\n", beforeFeeling, kitty_s_feeling);
+						}
+					}
+					else {
+						if (kitty_s_feeling > 0) {
+							kitty_s_feeling -= 1;
+						}
+						printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+					}
+				}
+			}
+			else if (catTower > 0) {
+				if (catTower_distance < scratcher_distance || scratcher == 0) {
+					printf("띨뻥이는 심심해서 캣타워 쪽으로 이동합니다.\n");
+					if (catTowerand > kitty) {
+						kitty += 1;
+					}
+					else if (catTowerand < kitty) {
+						kitty -= 1;
+					}
+					if (kitty == catTowerand) {
+						if (kitty_s_feeling >= 0 && kitty_s_feeling <= 1) {
+							kitty_s_feeling += 2;
+						}
+						else if (kitty_s_feeling >= 2) {
+							kitty_s_feeling = 3;
+						}
+						printf("띨뻥이는 캣 타워를 뛰어 다닙니다.\n");
+						printf("기분이 제법 좋아졌습니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+					}
+					else {
+						if (kitty_s_feeling > 0) {
+							kitty_s_feeling -= 1;
+						}
+						printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+					}
 				}
 			}
 			break;
 		case 2:printf("띨뻥이는 기분좋게 식빵을 굽고 있습니다.\n");
+			if (kitty == 2) {
+				if (turnCount == 0) {
+					break;
+				}
+				kitty;
+				kitty_s_feeling += 1;
+				printf("집에 들어온 띨뻥이는 집에서 안정감을 느낍니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+			}
 			break;
 		case 3: printf("띨뻥이는 골골송을 부르며 수프를 만들러 갑니다.\n");
-			if (kitty == ROOM_WIDTH - 1) {
-				kitty;
-			}
-			else {
-				kitty += 1;
-			}
+			if (kitty == ROOM_WIDTH - 1) { kitty; }
+			else { kitty += 1; }
 			break;
 		}
 		//수프 만들기
@@ -198,10 +244,10 @@ int main(void) {
 				else if (j == 2 && i == 2) {
 					printf("H");
 				}
-				else if (j == catTower && i == 2) {
+				else if (j == catTowerand && i == 2 && catTowerand != 0) {
 					printf("T");
 				}
-				else if (j == scratcher && i == 2) {
+				else if (j == scratcherand && i == 2 && scratcherand != 0) {
 					printf("S");
 				}
 				else if (j == ROOM_WIDTH - 1 && i == 2) {
@@ -263,7 +309,7 @@ int main(void) {
 			}
 			break;
 		case 1:
-			printf("띨뻥이의 기분은 그대로입니다: %d", kitty_s_feeling);
+			printf("띨뻥이의 기분은 그대로입니다: %d\n", kitty_s_feeling);
 			printf("띨뻥이의 턱을 긁어주었습니다.\n2/6의 확률로 친밀도가 높아집니다.\n주사위를 굴립니다. 또르륵...\n");
 			printf("%d이(가) 나왔습니다!\n", rr);
 			if (rr >= 5) {
@@ -284,14 +330,14 @@ int main(void) {
 				kitty_s_feeling += 1;
 			}
 			printf("장남감 쥐로 띨뻥이와 놀아 주었습니다.\n");
-			printf("띨뻥이의 기분이 조금 좋아졌습니다: %d->%d\n",beforeFeeling, kitty_s_feeling);
+			printf("띨뻥이의 기분이 조금 좋아졌습니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
 			break;
 		case 3:
-			if (kitty_s_feeling >= 0 && kitty_s_feeling < 3) {
+			if (kitty_s_feeling >= 0 && kitty_s_feeling <= 1) {
 				kitty_s_feeling += 2;
-				if (kitty_s_feeling >= 3) {
-					kitty_s_feeling = 3;
-				}
+			}
+			else if (kitty_s_feeling >= 2) {
+				kitty_s_feeling = 3;
 			}
 			printf("레이져 포인터로 띨뻥이와 놀아 주었습니다.\n");
 			printf("띨뻥이의 기분이 꽤 좋아졌습니다: %d->%d\n", beforeFeeling, kitty_s_feeling);
@@ -310,8 +356,8 @@ int main(void) {
 		cp += max;
 		printf("보유 CP: %d 포인트\n", cp);
 
-		Sleep(2000);
-		system("cls");
+		Sleep(1000);
+		printf("\n");
 
 		//상점구매
 		int shopping = 0;
@@ -320,21 +366,25 @@ int main(void) {
 		printf("0. 아무 것도 사지 않는다.\n");
 		printf("1. 장난감 쥐: 1CP");
 		if (ratToy > 0) {
+			ratToy++;
 			printf("(품절)");
 		}
 		printf("\n");
 		printf("2. 레이져 포인터: 2CP");
 		if (lazer > 0) {
+			lazer++;
 			printf("(품절)");
 		}
 		printf("\n");
 		printf("3. 스크래처: 4CP");
 		if (scratcher > 0) {
+			scratcher++;
 			printf("(품절)");
 		}
 		printf("\n");
 		printf("4. 캣 타워: 6CP");
 		if (catTower > 0) {
+			catTower++;
 			printf("(품절)");
 		}
 		printf("\n");
