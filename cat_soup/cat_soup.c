@@ -338,79 +338,79 @@ int main(void) {
 			printf("(품절)");
 		}
 		printf("\n");
-		 do{
+		do {
 			printf(">>");
 			scanf_s("%d", &shopping);
-		 } while (shopping <= 0 && shopping >= 4);
+		} while (shopping <= 0 && shopping >= 4);
 
 
-		 switch (shopping){
-		 case 0:
-			 kitty_s_feeling = 0;
-			 printf("정말 아무것도 안사시는군요.\n");
-			 printf("집사 자격 박탈입니다.\n");
-			 printf("띨뻥이의 기분이 0으로 됩니다. =(ㅡ^ㅡ)=\n");
-			 break;
-		 case 1:
-			 if (cp >= 1) {
-				 cp -= 1;
-				 ratToy = 1;
-				 printf("장난감 쥐를 구매했습니다.\n");
-				 printf("보유 CP %d 포인트\n", cp);
-			 }
-			 else if (cp < 1) {
-				 printf("CP가 부족합니다.");
-			 }
-			 else if (ratToy = 1) {
-				 printf("장난감 쥐를 이미 구매했습니다.\n");
-			 }
-			 break;
-		 case 2:
-			 if (cp >= 2) {
-				 cp -= 2;
-				 lazer = 1;
-				 printf("레이져 포인터를 구매했습니다.\n");
-				 printf("보유 CP %d 포인트\n", cp);
-			 }
-			 else if (cp < 2) {
-				 printf("CP가 부족합니다.");
+		switch (shopping) {
+		case 0:
+			kitty_s_feeling = 0;
+			printf("정말 아무것도 안사시는군요.\n");
+			printf("집사 자격 박탈입니다.\n");
+			printf("띨뻥이의 기분이 0으로 됩니다. =(ㅡ^ㅡ)=\n");
+			break;
+		case 1:
+			if (cp >= 1 && ratToy == 0) {
+				cp -= 1;
+				ratToy += 1;
+				printf("장난감 쥐를 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
+			}
+			else if (cp < 1) {
+				printf("CP가 부족합니다.");
+			}
+			else if (ratToy = 1) {
+				printf("장난감 쥐를 이미 구매했습니다.\n");
+			}
+			break;
+		case 2:
+			if (cp >= 2 && lazer == 0) {
+				cp -= 2;
+				lazer += 1;
+				printf("레이져 포인터를 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
+			}
+			else if (cp < 2) {
+				printf("CP가 부족합니다.");
 
-			 }
-			 else if (lazer = 1) {
-				 printf("레이져 포인터를 이미 구매했습니다.\n");
-			 }
-			 break;
-		 case 3:
-			 if (cp >= 4) {
-				 cp -= 4;
-				 scratcher += 1;
-				 printf("스크래쳐를 구매했습니다.\n");
-				 printf("보유 CP %d 포인트\n", cp);
-			 }
-			 else if (cp < 4) {
-				 printf("CP가 부족합니다.\n");
-			 }
-			 else if (scratcher > 0) {
-				 printf("스크래쳐를 이미 구매했습니다.\n");
-			 }
-			 break;
-		 case 4:
-			 if (cp >= 6) {
-				 cp -= 6;
-				 catTower += 1;
-				 printf("캣 타워를 구매했습니다.\n");
-				 printf("보유 CP %d 포인트\n", cp);
-			 }
-			 else if (cp < 6) {
-				 printf("CP가 부족합니다.\n");
-			 }
-			 else if (catTower > 0) {
-				 printf("캣 타워를 이미 구매했습니다.\n");
-			 }
-			 break;
-			 
-		 }
-		 turnCount++;
+			}
+			else if (lazer > 0) {
+				printf("레이져 포인터를 이미 구매했습니다.\n");
+			}
+			break;
+		case 3:
+			if (cp >= 4 && scratcher == 0) {
+				cp -= 4;
+				scratcher += 1;
+				printf("스크래쳐를 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
+			}
+			else if (cp < 4) {
+				printf("CP가 부족합니다.\n");
+			}
+			else if (scratcher > 0) {
+				printf("스크래쳐를 이미 구매했습니다.\n");
+			}
+			break;
+		case 4:
+			if (cp >= 6 && catTower == 0) {
+				cp -= 6;
+				catTower += 1;
+				printf("캣 타워를 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
+			}
+			else if (cp < 6) {
+				printf("CP가 부족합니다.\n");
+			}
+			else if (catTower > 0) {
+				printf("캣 타워를 이미 구매했습니다.\n");
+			}
+			break;
+
+		}
+		turnCount++;
 		Sleep(2000);
 		system("cls");
 
