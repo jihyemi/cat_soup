@@ -114,18 +114,11 @@ int main(void) {
 
 		switch (kitty_s_feeling) {
 		case 0: printf("기분이 매우 나쁜 띨뻥이는 집으로 향합니다.\n");
-			if (turnCount == 0) {
-				break;
+			if (kitty == 2) {
+
 			}
 			else {
-				if (kitty == 2) {
-					kitty;
-					kitty_s_feeling += 1;
-					printf("집에 들어온 띨뻥이는 집에서 안정감을 느낍니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
-				}
-				else {
-					kitty -= 1;
-				}
+				kitty -= 1;
 			}
 			break;
 		case 1:
@@ -177,40 +170,51 @@ int main(void) {
 					else if (catTowerand < kitty) {
 						kitty -= 1;
 					}
-					if (kitty == catTowerand) {
-						if (kitty_s_feeling >= 0 && kitty_s_feeling <= 1) {
-							kitty_s_feeling += 2;
-						}
-						else if (kitty_s_feeling >= 2) {
-							kitty_s_feeling = 3;
-						}
-						printf("띨뻥이는 캣 타워를 뛰어 다닙니다.\n");
-						printf("기분이 제법 좋아졌습니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
-					}
-					else {
-						if (kitty_s_feeling > 0) {
-							kitty_s_feeling -= 1;
-						}
-						printf("놀 거리가 없어서 기분이 매우 나빠집니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
-					}
 				}
 			}
 			break;
 		case 2:printf("띨뻥이는 기분좋게 식빵을 굽고 있습니다.\n");
-			if (kitty == 2) {
-				if (turnCount == 0) {
-					break;
-				}
-				kitty;
-				kitty_s_feeling += 1;
-				printf("집에 들어온 띨뻥이는 집에서 안정감을 느낍니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
-			}
 			break;
 		case 3: printf("띨뻥이는 골골송을 부르며 수프를 만들러 갑니다.\n");
 			if (kitty == ROOM_WIDTH - 1) { kitty; }
 			else { kitty += 1; }
 			break;
 		}
+
+		beforeFeeling = kitty_s_feeling;
+
+		//행동
+		if (kitty == 2) {
+			if (turnCount == 0) {}
+			else {
+				kitty_s_feeling += 1;
+				printf("집에 들어온 띨뻥이는 집에서 안정감을 느낍니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+			}
+		}
+		else if (kitty == scratcherand) {
+			if (turnCount == 0) {}
+			else {
+				if (kitty_s_feeling < 3) {
+					kitty_s_feeling += 1;
+				}
+				printf("띨뻥이는 스크래쳐를 긁고 놀았습니다.\n");
+				printf("기분이 조금 좋아졌습니다.%d->%d\n", beforeFeeling, kitty_s_feeling);
+			}
+		}
+		else if (kitty == catTowerand) {
+			if (turnCount == 0) {}
+			else {
+				if (kitty_s_feeling >= 0 && kitty_s_feeling <= 1) {
+					kitty_s_feeling += 2;
+				}
+				else if (kitty_s_feeling >= 2) {
+					kitty_s_feeling = 3;
+				}
+				printf("띨뻥이는 캣 타워를 뛰어 다닙니다.\n");
+				printf("기분이 제법 좋아졌습니다. %d->%d\n", beforeFeeling, kitty_s_feeling);
+			}
+		}
+
 		//수프 만들기
 		if (kitty == ROOM_WIDTH - 1) {
 			int soup = rand() % 3;
