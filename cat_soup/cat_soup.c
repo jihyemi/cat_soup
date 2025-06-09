@@ -81,12 +81,15 @@ int main(void) {
 
 
 		if (catTower == 1) {//방에 표시하기 위한 캣 타워 함수
-			scratcherand != catTowerand;
-			catTowerand = rand() % (rand_room_width - limit + 1) + limit;
+			do {
+				catTowerand = rand() % (rand_room_width - limit + 1) + limit;
+			} while (scratcher >= 0 && catTowerand == scratcherand);
+
 		}
 		if (scratcher == 1) {//방에 표시하기 위한 스크래쳐 랜덤 함수
-			scratcherand != catTowerand;
-			scratcherand = rand() % (rand_room_width - limit + 1) + limit;
+			do {
+				scratcherand = rand() % (rand_room_width - limit + 1) + limit;
+			} while (catTower >= 0 && scratcherand == catTowerand);
 		}
 
 		//고양이 기분
@@ -426,9 +429,11 @@ int main(void) {
 			}
 			else if (cp < 1) {
 				printf("CP가 부족합니다.");
+				printf("보유 CP %d 포인트\n", cp);
 			}
 			else if (ratToy = 1) {
 				printf("장난감 쥐를 이미 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
 			}
 			break;
 		case 2:
@@ -440,10 +445,12 @@ int main(void) {
 			}
 			else if (cp < 2) {
 				printf("CP가 부족합니다.");
+				printf("보유 CP %d 포인트\n", cp);
 
 			}
 			else if (lazer > 0) {
 				printf("레이져 포인터를 이미 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
 			}
 			break;
 		case 3:
@@ -458,6 +465,7 @@ int main(void) {
 			}
 			else if (scratcher > 0) {
 				printf("스크래쳐를 이미 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
 			}
 			break;
 		case 4:
@@ -469,9 +477,11 @@ int main(void) {
 			}
 			else if (cp < 6) {
 				printf("CP가 부족합니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
 			}
 			else if (catTower > 0) {
 				printf("캣 타워를 이미 구매했습니다.\n");
+				printf("보유 CP %d 포인트\n", cp);
 			}
 			break;
 
@@ -481,6 +491,7 @@ int main(void) {
 		system("cls");
 
 		//돌발 퀘스트
+		int x = 0;
 		if (turnCount % 3 == 0) {
 			if (kitty_s_feeling == 0) {
 				printf("띨뻥이가 기분이 매우 나쁩니다!\n");
